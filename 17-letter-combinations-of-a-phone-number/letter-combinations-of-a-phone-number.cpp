@@ -9,7 +9,7 @@ public:
         };
 
         vector<string> ans;
-        ans.push_back("");   // starting point
+        ans.push_back("");   
 
         for (int i = 0; i < digits.size(); i++) {
             vector<string> temp;
