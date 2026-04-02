@@ -21,6 +21,6 @@ public:
             }
 
         }
-        reverse(nums.begin()+bp+1,nums.end());
+        sort(nums.begin()+bp+1,nums.end());
     }
 };
