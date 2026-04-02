@@ -7,9 +7,8 @@ public:
         {
             if(nums[mid]==0)
             {
-                swap(nums[l],nums[mid]);
-                l++;
-                mid++;
+                swap(nums[l++],nums[mid++]);
+               
             }
             else if(nums[mid]==1)
             {
@@ -17,8 +16,8 @@ public:
             }
             else if(nums[mid]==2)
             {
-                swap(nums[mid],nums[h]);
-                h--;
+                swap(nums[mid],nums[h--]);
+                
             }
         }
        
