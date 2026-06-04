@@ -10,56 +10,56 @@
  */
 class Solution {
 public:
-    ListNode*reverse(ListNode*start)
+    ListNode*reverse(ListNode*h1)
     {
         ListNode*prev=nullptr;
-        ListNode*curr=start;
+        ListNode*curr=h1;
         while(curr)
         {
             ListNode*nextnode=curr->next;
             curr->next=prev;
             prev=curr;
             curr=nextnode;
+
         }
         return prev;
     }
     ListNode* reverseBetween(ListNode* head, int left, int right) {
-        ListNode* temp = head;
-        ListNode* leftbefore = nullptr;
-        ListNode* leftnode = nullptr;
-        ListNode* rightnode = nullptr;
-        ListNode* rightafter = nullptr;
-
-        int cnt = 0;
-
-        while (temp != nullptr) {
-            cnt++;
-
-            if (cnt == left - 1)
-                leftbefore = temp;
-
-            if (cnt == left)
-                leftnode = temp;
-
-            if (cnt == right)
-                rightnode = temp;
-
-            if (cnt == right + 1)
-                rightafter = temp;
-
-            temp = temp->next;
-        }
-        rightnode->next=nullptr;
-        ListNode*newhead=reverse(leftnode);
-        if(leftbefore)
+        ListNode*temp=head;
+        ListNode*left1=nullptr;
+        ListNode*left2=nullptr;
+        ListNode*right1=nullptr;
+        ListNode*right2=nullptr;
+        int cnt=0;
+        while(temp!=nullptr){cnt++;
+        if(cnt==left-1)
         {
-            leftbefore->next=newhead;
+            left1=temp;
+        }
+        if(cnt==left)
+        {
+            left2=temp;
+        }
+        if(cnt==right)
+        {
+            right1=temp;
+        }
+        if(cnt==right+1)
+        {
+            right2=temp;
+        }temp=temp->next;
+        }
+        right1->next=nullptr;
+        ListNode*newhead=reverse(left2);
+        if(left1)
+        {
+            left1->next=newhead;
         }
         else
         {
             head=newhead;
         }
-        leftnode->next=rightafter;
+        left2->next=right2;
         return head;
     }
 };
