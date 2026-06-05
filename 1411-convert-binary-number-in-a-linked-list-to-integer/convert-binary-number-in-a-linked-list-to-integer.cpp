@@ -22,7 +22,7 @@ public:
         int ans=0;
         for(int i=0;i<n;i++)
         {
-            ans+=arr[i]*pow(2,n-1-i);
+            ans=ans*2+arr[i];
         }
         return ans;
     }
