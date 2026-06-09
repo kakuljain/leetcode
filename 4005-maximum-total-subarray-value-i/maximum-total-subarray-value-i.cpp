@@ -4,6 +4,6 @@ public:
         long long mx = *max_element(nums.begin(), nums.end());
         long long mn = *min_element(nums.begin(), nums.end());
 
-        return 1LL * k * (mx - mn);
+        return k * (mx - mn);
     }
 };
