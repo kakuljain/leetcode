@@ -2,39 +2,42 @@ class Solution {
 public:
     int maximumScore(vector<int>& nums, int k) {
         int n = nums.size();
-        int ans = nums[k], cnt = 1;
-        int i = k, j = k;
-        int mi = nums[k];
-
-        while (i > 0 && j < n - 1) {
-
-            if (nums[i - 1] > nums[j + 1]) {
-                mi = min(mi, nums[i - 1]);
-                i--;
+        stack<int> st;
+        stack<int> s;
+        vector<int> l(n);
+        vector<int> r(n);
+        int ans=0;
+        for (int i = 0; i < n; i++) {
+            while (!st.empty() && nums[st.top()] >= nums[i]) {
+                st.pop();
             }
+            if (st.empty()) {
+                l[i] = -1;}
             else {
-                mi = min(mi, nums[j + 1]);
-                j++;
+                l[i] = st.top();
             }
-
-            cnt++;
-            ans = max(ans, cnt * mi);
-        }
-
-        while (i > 0) {
-            mi = min(mi, nums[i - 1]);
-            i--;
-            cnt++;
-            ans = max(ans, cnt * mi);
-        }
-
-        while (j < n - 1) {
-            mi = min(mi, nums[j + 1]);
-            j++;
-            cnt++;
-            ans = max(ans, cnt * mi);
-        }
-
+            st.push(i);}
+            for (int i = n-1; i >=0; i--) {
+                while (!s.empty() && nums[s.top()] >= nums[i]) {
+                    s.pop();
+                }
+                if (s.empty()) {
+                    r[i] = n;
+                } else {
+                    r[i] = s.top();
+                }
+                s.push(i);
+            }
+            for(int i=0;i<n;i++)
+            {
+                if(l[i]+1<=k&&k<=r[i]-1)
+                {
+                    int len=r[i]-l[i]-1;
+                    int s=nums[i]*len;
+                    ans=max(ans,s);
+                }
+                
+            }
         return ans;
     }
 };
