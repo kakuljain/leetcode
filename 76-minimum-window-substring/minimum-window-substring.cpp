@@ -23,7 +23,7 @@ public:
                     st = l;
                 }
                 b[s[l]]--;
-                if (a.count(s[l]) && b[s[l]] < a[s[l]])
+                if ( b[s[l]] < a[s[l]])
                     formed--;
                 l++;
             }
