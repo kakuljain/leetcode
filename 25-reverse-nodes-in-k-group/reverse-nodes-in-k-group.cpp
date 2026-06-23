@@ -10,76 +10,54 @@
  */
 class Solution {
 public:
-    ListNode* reverse(ListNode* h1)
+    ListNode*reverse(ListNode*h1)
     {
-        ListNode* prev = nullptr;
-        ListNode* curr = h1;
-
+        ListNode*prev=nullptr;
+        ListNode*curr=h1;
         while(curr)
         {
-            ListNode* nextnode = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = nextnode;
+            ListNode*nextnode=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=nextnode;
         }
-
         return prev;
     }
-
     ListNode* reverseKGroup(ListNode* head, int k) {
-
-        if(head == nullptr || k == 1)
+         if(head == nullptr || k == 1)
             return head;
-
-        ListNode* temp = head;
-        ListNode* left = head;
-        ListNode* left1 = nullptr;
-
-        ListNode* t2 = nullptr;  // final head
-        ListNode* t3 = nullptr;  // previous tail
-
-        int cnt = 0;
-
-        while(temp != nullptr)
-        {
-            cnt++;
-
-            if(cnt == k)
+        ListNode*t1=head;
+        ListNode*left=head;
+        ListNode*left1=nullptr;
+        ListNode*t2=nullptr;
+        ListNode*t3=nullptr;int cnt=0;
+        while(t1!=nullptr)
+        {cnt++;
+            if(cnt==k)
+            {    left1=t1->next;
+            t1->next=nullptr;
+               ListNode*tmp=reverse(left);
+            
+            if(t2==nullptr)
             {
-                left1 = temp->next;
-
-                temp->next = nullptr;
-
-                ListNode* t1 = reverse(left);
-
-                if(t2 == nullptr)
-                {
-                    t2 = t1;
-                }
-
-                if(t3 != nullptr)
-                {
-                    t3->next = t1;
-                }
-
-                left->next = left1;
-
-                t3 = left;
-
-                left = left1;
-                temp = left1;
-
-                cnt = 0;
+                t2=tmp;
             }
-            else
+            if(t3!=nullptr)
             {
-                temp = temp->next;
+                t3->next=tmp;
             }
+            left->next=left1;
+            t3=left;
+            left=left1;
+            t1=left1;
+            cnt=0;
         }
-
-        if(t2 == nullptr)
-            return head;
-
+        else 
+        {
+            t1=t1->next;
+        }
+        }
+        if(t2==nullptr) return head;
         return t2;
     }
 };
