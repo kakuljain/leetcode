@@ -1,28 +1,21 @@
 class Solution {
 public:
-    void f(int idx,vector<int>& nums,vector<vector<int>>&ans,vector<int>path,vector<int>& used)
+    void solve(int i,vector<vector<int>>&ans,vector<int>&nums)
     {
-        int n=nums.size();
-       
-        if(path.size()==n)
+        if(i==nums.size())
+        {ans.push_back(nums);
+        return;}
+        for(int j=i;j<nums.size();j++)
         {
-            ans.push_back(path);
-            return;
+            swap(nums[i],nums[j]);
+            solve(i+1,ans,nums);
+            swap(nums[i],nums[j]);
         }
-        for(int i=0;i<n;i++)
-        {
-            if(used[i]==1)
-            {continue;}
-            used[i]=1;
-        path.push_back(nums[i]);
-        f(idx+1,nums,ans,path,used);
-        used[i]=0;
-        path.pop_back();}
-       
+
     }
     vector<vector<int>> permute(vector<int>& nums) {
-        vector<int>path;vector<vector<int>>ans; vector<int>used(nums.size(),0);
-        f(0,nums,ans,path,used);
+        vector<vector<int>>ans;
+        solve(0,ans,nums);
         return ans;
     }
 };
